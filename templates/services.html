@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Services - Movie Magic</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="services-page">
+
+  <!-- ✅ Top Navigation with only essential links -->
+  <nav class="top-nav">
+    <a href="/" class="btn">🏠 Home</a>
+    <a href="/about" class="btn">ℹ️ About</a>
+    <a href="/services" class="btn">🛠️ Services</a>
+    <a href="/login" class="btn">🔐 Login</a>
+    <a href="/register" class="btn">📝 Register</a>
+  </nav>
+
+  <!-- ✅ Hero Header -->
+  <header class="services-hero">
+    <h1>🎬 Our Services</h1>
+    <p>Explore the features that make Movie Magic your best movie booking partner.</p>
+  </header>
+
+  <!-- ✅ Services Grid -->
+  <div class="container">
+    <section class="services-grid">
+      <div class="service-card">
+        <h3>🎟️ Quick Booking</h3>
+        <p>Book tickets instantly.</p>
+      </div>
+      <div class="service-card">
+        <h3>📍 Location Filter</h3>
+        <p>Find theaters near you.</p>
+      </div>
+      <div class="service-card">
+        <h3>💺 Seat Selection</h3>
+        <p>Pick your favorite seats visually.</p>
+      </div>
+      <div class="service-card">
+        <h3>📧 Email Confirmation</h3>
+        <p>Tickets sent to your email.</p>
+      </div>
+      <div class="service-card">
+        <h3>📄 QR Code Tickets</h3>
+        <p>Scannable PDF tickets.</p>
+      </div>
+      <div class="service-card">
+        <h3>📊 Dashboard</h3>
+        <p>View and manage your bookings.</p>
+      </div>
+    </section>
+  </div>
+
+</body>
+</html>

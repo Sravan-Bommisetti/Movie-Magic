@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Confirm Payment - Movie Magic</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="payment-page">
+
+  <div class="container glass-box fade-in">
+
+    <h2 class="highlight">🎫 Confirm Your Booking</h2>
+
+    <img src="{{ url_for('static', filename=poster) }}"
+         alt="{{ movie }} Poster"
+         class="movie-poster">
+
+    <div class="booking-info">
+      <p><strong>🎬 Movie:</strong> <span class="info">{{ movie }}</span></p>
+      <p><strong>🏢 Theater:</strong> <span class="info">{{ theater }}</span></p>
+      <p><strong>🕒 Show Time:</strong> <span class="info">{{ time }}</span></p>
+      <p><strong>💺 Seats:</strong> <span class="info">{{ seats | join(", ") }}</span></p>
+    </div>
+
+    <div class="calculation">
+      <h3>💰 Total Payment</h3>
+      <p><strong>{{ seat_count }}</strong> seat(s) × ₹<strong>{{ seat_price }}</strong> = <span class="total-price">₹{{ total_price }}</span></p>
+    </div>
+
+    <div class="qr-section">
+      <h3>📱 Scan to Pay via UPI</h3>
+      <img src="{{ url_for('payment_qr', amount=total_price) }}"
+           alt="UPI QR Code"
+           class="qr-code">
+      <p><strong>UPI ID:</strong> <span class="info">merchant@upi</span></p>
+    </div>
+
+    <form action="{{ url_for('finalize_booking') }}" method="POST">
+      {% for seat in seats %}
+        <input type="hidden" name="seats" value="{{ seat }}">
+      {% endfor %}
+      <input type="hidden" name="movie" value="{{ movie }}">
+      <input type="hidden" name="theater" value="{{ theater }}">
+      <input type="hidden" name="time" value="{{ time }}">
+      <input type="hidden" name="total_price" value="{{ total_price }}">
+      <input type="hidden" name="poster" value="{{ poster }}">
+      <input type="hidden" name="seat_price" value="{{ seat_price }}">
+
+      <button type="submit" class="btn large">✅ Payment Done</button>
+    </form>
+
+    <p>
+      <a href="{{ url_for('home1') }}" class="btn cancel">🏠 Cancel & Return Home</a>
+    </p>
+  </div>
+
+</body>
+</html>

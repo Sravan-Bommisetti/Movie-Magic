@@ -1,0 +1,835 @@
+/* -----------------------------------------------
+   Root Variables
+------------------------------------------------ */
+:root {
+  --primary: #2563eb;
+  --primary-dark: #1e40af;
+  --accent: #00ffd5;
+  --danger: #ff4c4c;
+  --success: #28a745;
+  --text-light: #f0f0f0;
+  --text-dark: #111;
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.25);
+  --radius: 12px;
+  --blur: blur(14px);
+}
+
+/* -----------------------------------------------
+   Reset & Base
+------------------------------------------------ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+h1, h2, h3, h4, h5 {
+  text-align: center;
+}
+form,
+.container {
+  text-align: center;
+}
+
+/* -----------------------------------------------
+   Page-specific Background Images
+------------------------------------------------ */
+body.index-page     { background-image: url("/static/index_bg.jpg"); }
+body.login-page     { background-image: url("/static/login_bg.jpg"); }
+body.home-page     { background-image: url("/static/home_bg.jpg"); }
+body.register-page  { background-image: url("/static/register_bg.jpg"); }
+body.about-page     { background-image: url("/static/about_bg.jpg"); }
+body.services-page  { background-image: url("/static/services_bg.jpg"); }
+body.booking-page   { background-image: url("/static/booking_form_bg.jpg"); }
+body.payment-page   { background-image: url("/static/payment_bg.jpg"); }
+body.ticket-page    { background-image: url("/static/tickets_bg.jpg"); }
+body.dashboard-page { background-image: url("/static/dashboard_bg.jpg"); }
+
+/* -----------------------------------------------
+   Universal Container - Glassmorphism
+------------------------------------------------ */
+.container {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 30px;
+  background: var(--glass-bg);
+  backdrop-filter: var(--blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+}
+.container {
+  background: rgba(255, 255, 255, 0.06);       /* ultra-light transparent white */
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);  /* very soft shadow */
+  border: 1px solid rgba(255, 255, 255, 0.12); /* super thin, subtle white border */
+  backdrop-filter: blur(4px);                   /* very gentle blur */
+  -webkit-backdrop-filter: blur(4px);
+  color: #fff;
+  max-width: 900px;
+  margin: 50px auto;
+  transition: background 0.3s ease, border 0.3s ease;
+}
+
+/* Optional: on hover, gently strengthen the effect */
+.container:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+
+
+/* -----------------------------------------------
+   Buttons
+------------------------------------------------ */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.3s ease;
+  cursor: pointer;
+  margin: 10px 5px;
+}
+
+.btn:hover {
+  background: var(--primary-dark);
+  transform: scale(1.05);
+}
+
+.btn.cancel {
+  background: var(--danger);
+}
+
+.btn.large {
+  padding: 12px 30px;
+  font-size: 1.2em;
+}
+
+/* -----------------------------------------------
+   Top Navigation
+------------------------------------------------ */
+.top-nav {
+  background: var(--glass-bg);
+  backdrop-filter: var(--blur);
+  padding: 15px;
+  text-align: center;
+  border-bottom: 2px solid var(--accent);
+}
+
+.top-nav .btn {
+  margin: 0 10px;
+}
+
+/* -----------------------------------------------
+   Forms
+------------------------------------------------ */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: var(--radius);
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-light);
+}
+
+input:focus {
+  outline: 2px solid var(--accent);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+label {
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+/* -----------------------------------------------
+   Hero Section Styling
+------------------------------------------------ */
+.index-page h1,
+.about-page h1,
+.services-page h1 {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  color: var(--accent);
+  text-align: center;
+}
+
+.tagline {
+  font-style: italic;
+  margin-bottom: 25px;
+}
+
+.action-buttons .btn {
+  margin: 10px;
+}
+
+/* -----------------------------------------------
+   Movie Cards
+------------------------------------------------ */
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.movie-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--blur);
+  border-radius: var(--radius);
+  box-shadow: 0 0 10px rgba(0,0,0,0.6);
+  padding: 15px;
+  width: 250px;
+  text-align: center;
+}
+
+.movie-card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.movie-card h3 {
+  margin: 10px 0;
+  color: var(--accent);
+}
+
+/* -----------------------------------------------
+   Booking Day Tabs
+------------------------------------------------ */
+.day-tabs {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.day-tab {
+  padding: 10px 20px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.15);
+  margin: 0 5px;
+  border-radius: var(--radius);
+}
+
+.day-tab.active {
+  background: var(--accent);
+  color: var(--text-dark);
+  font-weight: bold;
+}
+
+.day-section {
+  display: none;
+}
+
+.day-section.active {
+  display: block;
+}
+
+/* -----------------------------------------------
+   Seat Selection Grid
+------------------------------------------------ */
+#seat-grid {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.seat-row {
+  display: flex;
+  justify-content: center;
+  margin: 4px 0;
+}
+
+.seat {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid #666;
+  padding: 8px;
+  margin: 2px;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.seat.occupied {
+  background: #555;
+  cursor: not-allowed;
+}
+
+.seat.selected {
+  background: var(--accent);
+  color: #111;
+  font-weight: bold;
+}
+
+.screen-curve {
+  margin: 30px auto 10px;
+  width: 80%;
+  height: 40px;
+  border-top-left-radius: 50% 20px;
+  border-top-right-radius: 50% 20px;
+  background: #999;
+  text-align: center;
+  line-height: 40px;
+  color: #000;
+  font-weight: bold;
+}
+
+/* -----------------------------------------------
+   Seat Legend
+------------------------------------------------ */
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 15px 0;
+}
+
+.legend .box {
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.box.available { background: rgba(255,255,255,0.1); }
+.box.selected  { background: var(--accent); }
+.box.occupied  { background: #555; }
+
+/* -----------------------------------------------
+   Flash/Error Messages
+------------------------------------------------ */
+.flash-error,
+.flash-message {
+  background: rgba(255, 0, 0, 0.2);
+  padding: 10px;
+  border-left: 4px solid red;
+  margin-bottom: 15px;
+  color: white;
+  border-radius: var(--radius);
+}
+
+/* -----------------------------------------------
+   QR & Ticket Styling
+------------------------------------------------ */
+.qr-code {
+  width: 160px;
+  margin: 10px auto;
+}
+
+.movie-poster,
+.logo {
+  max-width: 150px;
+  display: block;
+  margin: 0 auto 20px;
+}
+
+.booking-info {
+  text-align: left;
+  margin-bottom: 20px;
+  padding: 10px;
+  background: var(--glass-bg);
+  border-radius: var(--radius);
+}
+
+/* -----------------------------------------------
+   Utility: Animations
+------------------------------------------------ */
+.fade-in {
+  animation: fadeIn 1.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+/* 🔹 Services Grid Layout */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+/* 🔹 Individual Service Card */
+.service-card {
+  background: rgba(255, 255, 255, 0.06);  /* thin glass effect */
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, background 0.3s ease;
+  color: #fff;
+}
+
+/* 🔹 Hover effect for interactivity */
+.service-card:hover {
+  transform: scale(1.03);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.service-card h3 {
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.top-nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 15px 0;
+  background: rgba(255, 255, 255, 0.06); /* thin glass */
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.top-nav .btn {
+  color: white;
+  background: transparent;
+  border: none;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  transition: 0.3s ease;
+}
+
+.top-nav .btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+.services-hero {
+  text-align: center;
+  padding: 60px 20px 30px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  margin-bottom: 40px;
+}
+
+.services-hero h1 {
+  font-size: 2.5em;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.services-hero p {
+  font-size: 1.1em;
+  color: #ccc;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.service-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 12px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+  transform: scale(1.03);
+}
+
+.service-card h3 {
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.service-card p {
+  color: #eee;
+  font-size: 0.95em;
+}
+/* Hamburger + dropdown */
+.top-right-menu {
+  position: fixed;
+  top: 20px;
+  right: 30px;
+  z-index: 9999;
+}
+.hamburger {
+  font-size: 26px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  border-radius: 10px;
+  padding: 10px 16px;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+}
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  backdrop-filter: blur(14px);
+}
+.dropdown-menu a {
+  display: block;
+  color: white;
+  padding: 8px 12px;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+.dropdown-menu a:last-child {
+  border-bottom: none;
+}
+
+/* Header */
+.welcome-header {
+  text-align: center;
+  margin-top: 120px;
+  margin-bottom: 50px;
+}
+.logo {
+  max-width: 120px;
+  border-radius: 12px;
+}
+.welcome-heading {
+  font-size: 2.5em;
+  color: var(--accent);
+  margin-top: 15px;
+}
+
+/* Centered movie cards */
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 20px;
+}
+.movie-card {
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 15px;
+  backdrop-filter: blur(12px);
+  padding: 20px;
+  text-align: center;
+  width: 250px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.2);
+}
+.movie-card h3 {
+  color: var(--accent);
+  margin: 10px 0;
+}
+.movie-card img {
+  width: 100%;
+  border-radius: 10px;
+}
+/* Add space below hamburger */
+.top-right-menu {
+  position: fixed;
+  top: 20px;
+  right: 30px;
+  z-index: 9999;
+}
+
+/* Header spacing */
+.welcome-header {
+  text-align: center;
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+
+/* Movie card spacing */
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  padding: 40px 20px;
+}
+/* 📍 Location Filter - Top Left */
+.location-filter {
+  position: fixed;
+  top: 20px;
+  left: 30px;
+  z-index: 9999;
+  text-align: left;
+  color: white;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 10px 15px;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+}
+
+.location-filter label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.location-filter input {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  width: 220px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  backdrop-filter: blur(6px);
+}
+/* Transparent Glassmorphism Box */
+.glass-box {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 30px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-box-alt {
+  margin: 25px 0;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+}
+
+.theater-block h3 {
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.showtimes {
+  margin-top: 10px;
+}
+
+.movie-poster {
+  width: 140px;
+  border-radius: 12px;
+  margin: 0 auto 20px;
+  display: block;
+}
+/* 🎫 Glass Containers */
+.glass-box {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 30px;
+  border-radius: var(--border-radius);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.glass-box-alt {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.06);
+  margin: 20px 0;
+}
+
+/* 🎟 Seat Styles */
+.seat-grid {
+  margin: 20px 0;
+}
+
+.seat-row {
+  display: flex;
+  justify-content: center;
+  margin: 4px 0;
+}
+
+.seat {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #666;
+  padding: 8px;
+  margin: 2px;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.seat.occupied {
+  background: #555;
+  cursor: not-allowed;
+}
+
+.seat.selected {
+  background: var(--accent);
+  color: #111;
+  font-weight: bold;
+}
+
+.screen-curve {
+  margin: 30px auto 10px;
+  width: 80%;
+  height: 40px;
+  border-top-left-radius: 50% 20px;
+  border-top-right-radius: 50% 20px;
+  background: #bbb;
+  text-align: center;
+  line-height: 40px;
+  color: #111;
+  font-weight: bold;
+}
+
+/* Legend */
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 15px 0;
+}
+
+.legend .box {
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.box.available { background: rgba(255, 255, 255, 0.1); }
+.box.selected  { background: var(--accent); }
+.box.occupied  { background: #555; }
+
+/* Poster */
+.movie-poster {
+  max-width: 140px;
+  border-radius: 12px;
+  margin: 0 auto 20px;
+  display: block;
+}
+/* 🔹 Professional Highlight Text */
+.highlight {
+  font-size: 2em;
+  color: var(--accent);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* 🔹 Total Price Display */
+.total-price {
+  color: var(--accent);
+  font-size: 1.6em;
+  font-weight: bold;
+}
+
+/* 🔹 Booking Info */
+.booking-info {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: var(--border-radius);
+  font-size: 1.1em;
+}
+
+.booking-info .info {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* 🔹 Calculation */
+.calculation {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  margin: 20px 0;
+  text-align: center;
+}
+
+.calculation h3 {
+  margin-bottom: 10px;
+  color: var(--accent);
+}
+
+/* 🔹 QR Section */
+.qr-section {
+  text-align: center;
+  margin: 25px 0;
+}
+
+.qr-section h3 {
+  font-size: 1.4em;
+  margin-bottom: 10px;
+}
+
+.qr-section .qr-code {
+  width: 180px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+  margin: 10px auto;
+}
+
+/* 🔹 Poster Image */
+.movie-poster {
+  width: 140px;
+  border-radius: 10px;
+  display: block;
+  margin: 0 auto 20px;
+}
+/* 🔹 Booking Info Box */
+.booking-info {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  margin-top: 25px;
+  font-size: 1.1em;
+  text-align: left;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+}
+
+.booking-info p {
+  margin: 10px 0;
+}
+
+.booking-info .info {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* 🔹 Buttons Group */
+.btn-group {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.btn.large {
+  padding: 12px 28px;
+  font-size: 1.15em;
+}
+
+

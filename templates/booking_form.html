@@ -1,0 +1,58 @@
+<!-- booking_form.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Book Tickets - Movie Magic</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="booking-page">
+  <div class="container">
+    <img src="{{ url_for('static', filename=movie.poster_filename) }}" alt="{{ movie.title }}" style="width: 150px; border-radius: 10px;">
+    <h2>🎟️ Booking for {{ movie.title }}</h2>
+    <p><strong>Location:</strong> {{ selected_location|title }}</p>
+
+    <div class="day-tabs">
+      {% for day in ['TODAY', 'TOMORROW', 'DAY OF TOMORROW'] %}
+        {% set safe_day = day|lower|replace(' ', '_') %}
+        <span class="day-tab {% if loop.first %}active{% endif %}" onclick="showDay('{{ safe_day }}')">{{ day }}</span>
+      {% endfor %}
+    </div>
+
+    {% for day in ['TODAY', 'TOMORROW', 'DAY OF TOMORROW'] %}
+      {% set safe_day = day|lower|replace(' ', '_') %}
+      <div id="{{ safe_day }}-section" class="day-section {% if loop.first %}active{% endif %}">
+        {% for theater in theaters %}
+          {% set timings = theater.timings_by_day.get(day, []) %}
+          {% if timings %}
+            <div class="theater-block">
+              <h3>🎭 {{ theater.name }}</h3>
+              <p><strong>Price:</strong> ₹{{ theater.price }}</p>
+              {% for time in timings %}
+                <form method="GET" action="/select_seats" style="display:inline-block;">
+                  <input type="hidden" name="title" value="{{ movie.title }}">
+                  <input type="hidden" name="theater" value="{{ theater.name }}">
+                  <input type="hidden" name="time" value="{{ time }}">
+                  <input type="hidden" name="day" value="{{ day }}">
+                  <input type="hidden" name="price" value="{{ theater.price }}">
+                  <button type="submit" class="btn">{{ time }}</button>
+                </form>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endfor %}
+
+    <a href="{{ url_for('home1') }}" class="btn">⬅ Back</a>
+  </div>
+
+  <script>
+    function showDay(dayKey) {
+      document.querySelectorAll('.day-tab').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.day-section').forEach(section => section.classList.remove('active'));
+      document.querySelector(`.day-tab[onclick="showDay('${dayKey}')"]`).classList.add('active');
+      document.getElementById(`${dayKey}-section`).classList.add('active');
+    }
+  </script>
+</body>
+</html>

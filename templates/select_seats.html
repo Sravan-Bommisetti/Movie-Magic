@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Select Seats - Movie Magic</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="booking-page">
+
+  <div class="container glass-box fade-in">
+
+    {% if movie.poster_filename %}
+      <img src="{{ url_for('static', filename=movie.poster_filename) }}" alt="{{ movie.title }} Poster" class="movie-poster">
+    {% endif %}
+
+    <h2 style="color: var(--accent);">🎬 {{ movie.title }}</h2>
+    <h3>📍 {{ selected_theater }}</h3>
+    <h4>🕒 {{ selected_time }}</h4>
+
+    <form method="POST" action="{{ url_for('confirm_ticket') }}" onsubmit="return validateSeats();">
+      <!-- Hidden values passed to backend -->
+      <input type="hidden" name="movie" value="{{ movie.title }}">
+      <input type="hidden" name="time" value="{{ selected_time }}">
+      <input type="hidden" name="price" value="{{ selected_price }}">
+      <input type="hidden" name="theater" value="{{ selected_theater }}">
+      <input type="hidden" name="seats" id="selectedSeats">
+
+      <label><strong>💺 Choose Your Seats (Min 1, Max 6):</strong></label>
+      <div id="seat-grid" class="seat-grid glass-box-alt"></div>
+
+      <p id="seat-count" style="margin-top: 10px;">Selected Seats: 0</p>
+
+      <div class="screen-curve">🎬 SCREEN</div>
+
+      <div class="legend">
+        <div><div class="box available"></div> Available</div>
+        <div><div class="box selected"></div> Selected</div>
+        <div><div class="box occupied"></div> Occupied</div>
+      </div>
+
+      <button type="submit" class="btn">✅ Confirm Booking</button>
+    </form>
+  </div>
+
+  <script>
+    const occupiedSeats = {{ occupied_seats | tojson }};
+    document.addEventListener('DOMContentLoaded', function () {
+      const grid = document.getElementById('seat-grid');
+      const selectedSeats = [];
+
+      const rows = 'ABCDEFGHIJKLM';
+      const cols = 17;
+
+      for (const r of rows) {
+        const rowDiv = document.createElement('div');
+        rowDiv.classList.add('seat-row');
+
+        for (let col = 1; col <= cols; col++) {
+          const seatId = `${r}${col}`;
+          const btn = document.createElement('button');
+          btn.textContent = seatId;
+          btn.className = 'seat';
+          btn.type = 'button';
+          btn.dataset.seatId = seatId;
+
+          if (occupiedSeats.includes(seatId)) {
+            btn.classList.add('occupied');
+            btn.disabled = true;
+          }
+
+          btn.onclick = function () {
+            if (btn.classList.contains('occupied')) return;
+
+            const i = selectedSeats.indexOf(seatId);
+            if (i > -1) {
+              selectedSeats.splice(i, 1);
+              btn.classList.remove('selected');
+            } else {
+              if (selectedSeats.length >= 6) {
+                alert("⚠️ Max 6 seats allowed.");
+                return;
+              }
+              selectedSeats.push(seatId);
+              btn.classList.add('selected');
+            }
+
+            document.getElementById('selectedSeats').value = selectedSeats.join(',');
+            document.getElementById('seat-count').textContent =
+              `Selected Seats: ${selectedSeats.length}`;
+          };
+
+          rowDiv.appendChild(btn);
+        }
+
+        grid.appendChild(rowDiv);
+      }
+    });
+
+    function validateSeats() {
+      const count = document.getElementById('selectedSeats').value.split(',').filter(Boolean).length;
+      if (count < 1) {
+        alert("⚠️ Select at least one seat.");
+        return false;
+      }
+      return true;
+    }
+  </script>
+</body>
+</html>

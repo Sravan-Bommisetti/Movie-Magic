@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Ticket - Movie Magic</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="ticket-page">
+  <div class="container">
+    <!-- 🎬 Logo at the top -->
+    <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Movie Magic Logo" class="logo">
+
+
+    <h2>🎟️ Your Movie Ticket</h2>
+
+    <div class="booking-info">
+      <p><strong>Booking ID:</strong> {{ booking.booking_id }}</p>
+      <p><strong>Movie:</strong> {{ booking.movie }}</p>
+      <p><strong>Theater:</strong> {{ booking.theater }}</p>
+      <p><strong>Time:</strong> {{ booking.time }}</p>
+      <p><strong>Seats:</strong> {{ booking.seats }}</p>
+      <p><strong>Price:</strong> ₹{{ booking.price }}</p>
+    </div>
+     <div class="qr-section">
+      <h4>Scan to view your ticket:</h4>
+      <img src="{{ url_for('ticket_qr', booking_id=booking.booking_id) }}" alt="QR Code" class="qr-code">
+    </div>
+
+    <div class="btn-group">
+      <a href="{{ url_for('download_ticket', booking_id=booking.booking_id) }}" class="btn">📥 Download PDF</a>
+      <a href="/home1" class="btn">🏠 Back to Home</a>
+    </div>
+  </div>
+</body>
+</html>

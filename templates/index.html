@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🎬 Welcome-Movie Magic</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="index-page">
+
+  <!-- 🔝 Navigation Bar -->
+  <header class="top-nav">
+    <a href="/" class="btn">🏠 Home</a>
+    <a href="/about" class="btn">ℹ️ About</a>
+    <a href="/services" class="btn">🛠 Services</a>
+  </header>
+
+  <!-- 🎬 Hero Section -->
+  <main class="container fade-in">
+    <h1>🎥 Movie Magic</h1>
+    <p class="tagline">Your gateway to breathtaking cinematic experiences.</p>
+
+    <div class="action-buttons">
+      <a href="/login" class="btn large">🔐 Login</a>
+      <a href="/register" class="btn large">📝 Register</a>
+    </div>
+  </main>
+
+  <!-- ✨ Background Overlay (Optional) -->
+  <div class="overlay-gradient"></div>
+
+</body>
+</html>

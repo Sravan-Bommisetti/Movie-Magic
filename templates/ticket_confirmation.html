@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Booking Confirmed - Movie Magic</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="ticket-page">
+
+  <div class="container glass-box fade-in">
+
+    <h2 class="highlight">✅ Booking Confirmed!</h2>
+    <p>Your seats are ready. Enjoy your movie experience with Movie Magic.</p>
+
+    <div class="booking-info">
+    <h2>🎉 Booking Confirmed!</h2>
+<p><strong>Movie:</strong> {{ booking.movie }}</p>
+<p><strong>Theater:</strong> {{ booking.theater }}</p>
+<p><strong>Time:</strong> {{ booking.time }}</p>
+<p><strong>Seats:</strong> {{ booking.seats }}</p>
+<p><strong>Booking ID:</strong> {{ booking.booking_id }}</p>
+
+<!-- Optional download button -->
+<a href="{{ url_for('download_ticket', booking_id=booking.booking_id) }}" class="btn">📄 Download Ticket PDF</a>
+
+      <a href="/home1" class="btn cancel">🏠 Back to Home</a>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - Movie Magic</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="dashboard-page">
+
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="sidebar">👤 My Profile
+      <h4>🎬 Movie Magic</h4>
+      <a href="{{ url_for('dashboard') }}" class="nav-link active">🏠 Dashboard</a>
+      
+       
+      <a href="{{ url_for('profile') }}" class="nav-link">👤 My Profile</a>
+      <a href="{{ url_for('logout') }}" class="nav-link">🚪 Logout</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content-area">
+      <!-- 👤 Welcome Note -->
+      <div style="margin-bottom: 20px;">
+        <h3>🎉 Thank you for booking with Movie Magic, {{ user.name }}!<br>We appreciate your love for cinema.</h3>
+      </div>
+
+      <!-- Summary Card -->
+      <div class="stat-card">
+        <h3>🎟 Total Bookings: {{ total_tickets }}</h3>
+        {% if latest_ticket %}
+          <p>Latest Booking: {{ latest_ticket.movie }} – {{ latest_ticket.time }}</p>
+        {% endif %}
+      </div>
+
+      <!-- Tickets Section -->
+      {% if tickets %}
+        <h3 style="margin-top: 30px;">🎫 Your Tickets</h3>
+        {% for ticket in tickets|reverse %}
+          <div class="stat-card" style="background: white; color: #333; margin-top: 20px;">
+            <h4>{{ ticket.movie }}</h4>
+            <p><strong>Booking ID:</strong> {{ ticket.booking_id }}</p>
+            <p><strong>Theater:</strong> {{ ticket.theater }}</p>
+            <p><strong>Time:</strong> {{ ticket.time }}</p>
+            <p><strong>Seats:</strong> {{ ticket.seats }}</p>
+            <div class="btn-group">
+              <a href="{{ url_for('download_ticket', booking_id=ticket.booking_id) }}" class="btn">📥 Download PDF</a>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>No tickets booked yet.</p>
+      {% endif %}
+
+      <!-- New Movie Highlight -->
+      {% if new_movie %}
+      <div class="teaser-card" style="margin-top: 40px;">
+        <div class="card-body">
+          <h5 class="card-title">🔥 New Movie Release!</h5>
+          <p>Now showing: <strong>{{ new_movie.title }}</strong>. Book now and don't miss out!</p>
+        </div>
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+</body>
+</html>

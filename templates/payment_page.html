@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pay Now - Movie Magic</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="ticket-page">
+  <div class="container">
+    <h2>💳 Scan to Pay</h2>
+
+    <img src="{{ url_for('static', filename=poster) }}"
+         alt="{{ movie }} Poster"
+         style="width:150px;height:auto;">
+
+    <p><strong>Movie:</strong> {{ movie }}</p>
+    <p><strong>Theater:</strong> {{ theater }}</p>
+    <p><strong>Show Time:</strong> {{ time }}</p>
+    <p><strong>Seats:</strong> {{ seats | join(", ") }}</p>
+
+    <div style="margin-top:20px; border:1px solid #ccc; padding:10px;">
+      <p><strong>Calculation:</strong></p>
+      <p>Seats x Price = Total</p>
+      <p>{{ seat_count }} x ₹{{ seat_price }} = <strong>₹{{ total_price }}</strong></p>
+    </div>
+
+    <h3>UPI Payment QR</h3>
+    <img src="/payment_qr?amount={{ total_price }}" alt="UPI QR Code" style="width:250px;height:250px;">
+    <p><strong>UPI ID:</strong> merchant@upi</p>
+
+    <form method="POST" action="{{ url_for('finalize_booking') }}">
+      {% for seat in seats %}
+        <input type="hidden" name="seats" value="{{ seat }}">
+      {% endfor %}
+      <input type="hidden" name="movie" value="{{ movie }}">
+      <input type="hidden" name="theater" value="{{ theater }}">
+      <input type="hidden" name="time" value="{{ time }}">
+      <input type="hidden" name="total_price" value="{{ total_price }}">
+      <input type="hidden" name="poster" value="{{ poster }}">
+      <input type="hidden" name="seat_price" value="{{ seat_price }}">
+      <button type="submit" class="btn">✅ Payment Done</button>
+    </form>
+
+    <p><a href="{{ url_for('home1') }}" class="btn">🏠 Cancel & Return Home</a></p>
+  </div>
+</body>
+</html>
