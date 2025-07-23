@@ -5,37 +5,22 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.colors import HexColor, white
 from reportlab.lib.utils import ImageReader
+from werkzeug.security import generate_password_hash, check_password_hash
 import uuid
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
+# AWS Setup
 dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
 sns = boto3.client('sns', region_name='us-east-1')
 
-BOOKING_TABLE = 'MovieMagicBookings'
 USER_TABLE = 'MovieMagicUsers'
+BOOKING_TABLE = 'MovieMagicBookings'
+SNS_TOPIC_ARN = 'your-sns-topic-arn'  # replace with your SNS topic ARN
 
-
-def create_tables():
-    try:
-        dynamodb.create_table(
-            TableName=BOOKING_TABLE,
-            KeySchema=[{'AttributeName': 'booking_id', 'KeyType': 'HASH'}],
-            AttributeDefinitions=[{'AttributeName': 'booking_id', 'AttributeType': 'S'}],
-            BillingMode='PAY_PER_REQUEST'
-        )
-    except:
-        pass
-    try:
-        dynamodb.create_table(
-            TableName=USER_TABLE,
-            KeySchema=[{'AttributeName': 'email', 'KeyType': 'HASH'}],
-            AttributeDefinitions=[{'AttributeName': 'email', 'AttributeType': 'S'}],
-            BillingMode='PAY_PER_REQUEST'
-        )
-    except:
-        pass
+table_users = dynamodb.Table(USER_TABLE)
+table_bookings = dynamodb.Table(BOOKING_TABLE)
 
 
 # Helper funcs
@@ -708,9 +693,9 @@ def dashboard():
 
 def send_sns_email(email, subject, message):
     sns.publish(TopicArn='your-sns-topic-arn', Message=message, Subject=subject)
-
+    
 if __name__ == '__main__':
-    create_tables()
     threading.Timer(1.5, lambda: webbrowser.open("http://127.0.0.1:5000/")).start()
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5000)
+
 
