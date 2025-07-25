@@ -696,7 +696,6 @@ def send_sns_email(email, subject, message):
     sns.publish(TopicArn='your-sns-topic-arn', Message=message, Subject=subject)
     
 if __name__ == '__main__':
-    threading.Timer(1.5, lambda: webbrowser.open("http://127.0.0.1:5000/")).start()
     app.run(debug=True, host='0.0.0.0', port=5000)
 
 
