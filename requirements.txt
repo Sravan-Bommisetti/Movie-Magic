@@ -1,2 +1,22 @@
-Flask
-boto3
+# --- Flask Core ---
+Flask==2.3.3
+Flask_SQLAlchemy==3.1.1
+Flask-WTF==1.2.1
+Werkzeug==2.3.7
+
+# --- Form & Email Utilities ---
+email-validator==2.1.0.post1
+python-dotenv==1.0.1
+requests==2.31.0
+
+# --- AWS SDK ---
+boto3==1.34.95
+botocore==1.34.95
+
+# --- PDF & QR Generation ---
+reportlab==4.1.0
+qrcode==7.4.2
+Pillow==10.2.0
+
+# --- Deployment Tools ---
+gunicorn==21.2.0
