@@ -17,7 +17,7 @@ sns = boto3.client('sns', region_name='us-east-1')
 
 USER_TABLE = 'MovieMagicUsers'
 BOOKING_TABLE = 'MovieMagicBookings'
-SNS_TOPIC_ARN = 'your-sns-topic-arn'  # replace with your SNS topic ARN
+SNS_TOPIC_ARN = 'arn:aws:sns:us-east-1:242201287692:MovieTicketNotifications:88bc4ccf-d526-44df-96c0-5b6ff403b5e6'  # replace with your SNS topic ARN
 
 
 table_users = dynamodb.Table(USER_TABLE)
